@@ -1,8 +1,15 @@
-node_modules
-build
 .dockerignore
-**/.git
-**/node_modules
-Dockerfile
-Dockerfile.prod
-Dockerfile.local
+**/node_modules/
+
+# directories
+**/bin/
+**/obj/
+**/out/
+
+# files
+Dockerfile*
+**/*.trx
+**/*.md
+**/*.ps1
+**/*.cmd
+**/*.sh
