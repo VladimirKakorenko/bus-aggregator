@@ -1,0 +1,19 @@
+FROM node:16.15.0-alpine
+WORKDIR /app
+
+COPY Client/package.json ./
+COPY Client/package-lock.json ./
+ENV PATH /app/node_modules/.bin:$PATH
+
+RUN npm install
+
+COPY Client ./
+
+CMD ["npm", "start"]
+
+
+# Run container command:
+# docker run -it --rm -v ${PWD}/Client:/app -v /app/node_modules -p 3001:3000 -e CHOKIDAR_USEPOLLING=true busweb:dev
+
+
+
