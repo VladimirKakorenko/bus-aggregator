@@ -1,0 +1,12 @@
+{
+    "endpoints": [
+        {
+            "id": "minsk",
+            "captionId": "minsk caption"
+        },
+        {
+            "id": "mogilev",
+            "captionId": "mogilev caption"
+        }
+    ]
+}
