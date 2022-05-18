@@ -3,10 +3,10 @@ FROM node:16-alpine as web-build
 WORKDIR /webbuild/src
 
 COPY Web/Server/Client/package.json .
-COPY Web/Server/Client/package-lock.json .
+COPY Web/Server/Client/yarn.lock .
 
-RUN npm install -g npm@8
-RUN npm install
+# RUN npm install -g yarn@1.22
+RUN yarn install
 
 COPY Web/Server/Client .
 RUN npm run build

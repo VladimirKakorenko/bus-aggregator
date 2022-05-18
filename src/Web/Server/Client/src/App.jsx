@@ -1,6 +1,7 @@
-import { Country } from './core/widgets/Country/Country.jsx';
-import { Widget } from './core/widgets/Widget.jsx';
 import React from 'react';
+
+import { Country } from '@core/widgets/Country/Country';
+import { Widget } from '@core/widgets/Widget';
 
 export const App = () => {
     return (

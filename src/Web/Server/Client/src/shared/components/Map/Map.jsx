@@ -1,16 +1,17 @@
 import React from 'react';
-import './Map.css';
-import { CountryData } from './Map.config.js';
-import { useSelectedCities } from '../../hooks/useSelectedCities.js';
 
-export const Map = (props) => {
+import './Map.css';
+import { CountryData } from './Map.config';
+import { useSelectedCities } from '@shared/hooks/useSelectedCities';
+
+export const Map = () => {
     const cityTransform = 'matrix(0.17671, 0, 0, 0.18984, 74.863083, 210.296204)';
     const cityIndicatorSize = {
         rx: '8',
         ry: '8',
     };
 
-    const {selectedCities, setSelectedCity} = useSelectedCities();
+    const { selectedCities, setSelectedCity } = useSelectedCities();
 
     const onCityClick = id => {
         setSelectedCity(id);
