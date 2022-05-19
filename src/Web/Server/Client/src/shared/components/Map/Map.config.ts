@@ -1,22 +1,6 @@
-export type CaptionPosition = {
-    x: number;
-    y: number;
-}
+import { CityPoint } from '@shared/infastructure/Map';
 
-export type indicatorPosition = {
-    cx: number;
-    cy: number;
-}
-
-export type CityPoint = {
-    id: string;
-    caption: string;
-
-    captionPosition: CaptionPosition;
-    indicatorPosition: indicatorPosition;
-}
-
-export const CountryData = [
+export const cities = [
     {
         id: 'hrodna',
         caption: 'Hrodna',
