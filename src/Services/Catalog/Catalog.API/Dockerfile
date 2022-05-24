@@ -1,27 +1,9 @@
-# Build Web Client
-FROM node:16-alpine as web-build
-WORKDIR /webbuild/src
-
-COPY Web/Client/package.json .
-COPY Web/Client/yarn.lock .
-
-# RUN npm install -g yarn@1.22
-RUN yarn install
-
-COPY Web/Client .
-RUN npm run build
-# End
-
-# Init Dotnet server
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS base
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
+EXPOSE 80
+EXPOSE 443
 
-ENV ASPNETCORE_URLS=http://*:5002
-ENV ASPNETCORE_ENVIRONMENT=Production
-
-# Publish project
-FROM mcr.microsoft.com/dotnet/sdk:6.0 AS publish
-WORKDIR /src
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 
 COPY "BusAggregator.sln" "BusAggregator.sln"
 
@@ -35,13 +17,13 @@ COPY "NuGet.config" "NuGet.config"
 RUN dotnet restore "BusAggregator.sln"
 
 COPY . .
-COPY --from=web-build /webbuild/wwwroot /src/Web/wwwroot
-WORKDIR /src/Web
+WORKDIR /Services/Catalog/Catalog.API
 RUN dotnet publish --no-restore -c Release -o /app
 
-FROM base as final
+FROM build AS publish
+
+FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "WebSPA.dll"]
 
-# End publish project
+ENTRYPOINT ["dotnet", "Catalog.API.dll"]
