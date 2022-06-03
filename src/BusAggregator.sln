@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateway", "ApiGateway", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web.Bus.HttpAggregator", "ApiGateway\Web.Bus.HttpAggregator\Web.Bus.HttpAggregator.csproj", "{3B85BB4C-179C-4BED-B433-27BD2393C6C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebStatus", "WebStatus\WebStatus.csproj", "{F1F6BAA5-AC48-44A3-AE43-C150F36EB75F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{3B85BB4C-179C-4BED-B433-27BD2393C6C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B85BB4C-179C-4BED-B433-27BD2393C6C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B85BB4C-179C-4BED-B433-27BD2393C6C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1F6BAA5-AC48-44A3-AE43-C150F36EB75F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1F6BAA5-AC48-44A3-AE43-C150F36EB75F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1F6BAA5-AC48-44A3-AE43-C150F36EB75F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1F6BAA5-AC48-44A3-AE43-C150F36EB75F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{D0A68A69-2B92-4497-BE4E-5499D111E5FB} = {D4B2A8A2-8CE5-4F04-982C-4059BB2ED1DA}

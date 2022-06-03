@@ -14,7 +14,19 @@ services:
   #   environment:
   #     - CHOKIDAR_USEPOLLING=true
 
-  web-server:
+  webstatus:
+    container_name: webstatus
+    build:
+      context: .
+      dockerfile: WebStatus/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - PORT=80
+      - PATH_BASE=/webstatus
+    ports:
+      - "5104:80"
+
+  webspa-server:
     container_name: spaserver
     build:
       context: .
