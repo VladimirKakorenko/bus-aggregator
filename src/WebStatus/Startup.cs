@@ -36,7 +36,11 @@ public class Startup
             app.UsePathBase(pathBase);
         }
 
-        app.UseHealthChecksUI(config => config.UIPath = "/hc-ui");
+        app.UseHealthChecksUI(config =>
+        {
+            config.ResourcesPath = string.IsNullOrEmpty(pathBase) ? "/ui/resources" : $"{pathBase}/ui/resources";
+            config.UIPath = "/hc-ui";
+        });
 
         app.UseStaticFiles();
 

@@ -1,8 +1,8 @@
 version: '3.7'
 
 services:
-  webaggregator:
-    image: ${REGISTRY:-bus}/webaggregator:${PLATFORM:-linux}-${TAG:-latest}
+  webapigw:
+    image: ${REGISTRY:-bus}/webapigw:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: ApiGateway/Web.Bus.HttpAggregator/Dockerfile
@@ -19,10 +19,10 @@ services:
       context: .
       dockerfile: Web/Dockerfile
     depends_on:
-      - catalog-api
+      - data-api
       - adapter-api
 
-  catalog-api:
+  data-api:
     image: ${REGISTRY:-bus}/catalog.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
