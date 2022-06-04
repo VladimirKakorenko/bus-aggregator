@@ -1,0 +1,39 @@
+{
+    "Routes": [
+        {
+            "DownstreamPathTemplate": "/{everything}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "adapter-api",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/adapter-api/{everything}",
+            "UpstreamHttpMethod": [
+                "POST",
+                "PUT",
+                "GET"
+            ]
+        },
+        {
+            "DownstreamPathTemplate": "/{everything}",
+            "DownstreamScheme": "http",
+            "DownstreamHostAndPorts": [
+                {
+                    "Host": "catalog-api",
+                    "Port": 80
+                }
+            ],
+            "UpstreamPathTemplate": "/api/{version}/c/{everything}",
+            "UpstreamHttpMethod": [
+                "POST",
+                "PUT",
+                "GET"
+            ]
+        }
+    ],
+    "GlobalConfiguration": {
+        "BaseUrl": "http://0.0.0.0:80"
+    }
+}

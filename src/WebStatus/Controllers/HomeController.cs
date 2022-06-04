@@ -23,6 +23,9 @@ public class HomeController : Controller
         var configurationValues = _configuration.GetSection("HealthChecksUI:HealthChecks")
             .GetChildren()
             .SelectMany(cs => cs.GetChildren())
+            .Union(_configuration.GetSection("HealthChecks-UI:HealthChecks")
+            .GetChildren()
+            .SelectMany(cs => cs.GetChildren()))
             .ToDictionary(v => v.Path, v => v.Value);
 
         if (configurationValues is null)

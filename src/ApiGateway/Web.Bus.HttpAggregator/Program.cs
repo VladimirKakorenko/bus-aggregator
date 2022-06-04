@@ -1,3 +1,6 @@
+using Ocelot.DependencyInjection;
+using Ocelot.Middleware;
+
 namespace Web.Bus.HttpAggregator;
 
 public class Program
@@ -7,11 +10,28 @@ public class Program
         CreateHostBuilder(args).Build().Run();
     }
 
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
-        Host.CreateDefaultBuilder(args)
+    public static IWebHostBuilder CreateHostBuilder(string[] args)
+    {
+        var builder = new WebHostBuilder();
+
+        builder
+            .UseKestrel()
             .UseContentRoot(Directory.GetCurrentDirectory())
-            .ConfigureWebHostDefaults(webBuilder =>
+            .ConfigureAppConfiguration((hostingContext, c) =>
             {
-                webBuilder.UseStartup<Startup>();
+                c.AddJsonFile("appsettings", true, true)
+                    .AddJsonFile($"appsettings.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true)
+                    .AddJsonFile(Path.Combine("Configuration", "configuration.json"));
+            })
+            .ConfigureServices(s =>
+            {
+                s.AddOcelot();
+            })
+            .Configure(app =>
+            {
+                app.UseOcelot().Wait();
             });
+
+        return builder;
+    }
 }

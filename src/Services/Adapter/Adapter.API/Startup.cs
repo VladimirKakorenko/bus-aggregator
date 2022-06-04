@@ -4,6 +4,7 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
+        services.AddControllers();
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
     }
@@ -20,7 +21,7 @@ public class Startup
 
         app.UseEndpoints(endpoints =>
         {
-            endpoints.Map("/", c => c.Response.WriteAsync("value"));
+            endpoints.MapDefaultControllerRoute();
         });
     }
 }

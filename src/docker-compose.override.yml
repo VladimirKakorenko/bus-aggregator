@@ -1,0 +1,48 @@
+version: '3.7'
+
+services:
+  webaggregator:
+    environment:
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - ASPNETCORE_ENVIRONMENT=Development
+      - PATH_BASE=/aggregator
+    ports:
+      - 5110:80
+
+  webstatus:
+    environment:
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - ASPNETCORE_ENVIRONMENT=Development
+      - PATH_BASE=/webstatus
+      - HealthChecksUI__HealthChecks__0__Name=Adapter HTTP Check
+      - HealthChecksUI__HealthChecks__0__Uri=http://adapter-api/hc
+      - HealthChecksUI__HealthChecks__1__Name=Catalog HTTP Check
+      - HealthChecksUI__HealthChecks__1__Uri=http://catalog-api/hc
+      - HealthChecksUI__HealthChecks__2__Name=WebSPA HTTP Check
+      - HealthChecksUI__HealthChecks__2__Uri=http://webspa/hc
+    ports:
+      - "5101:80"
+
+  webspa-server:
+    environment:
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - ASPNETCORE_ENVIRONMENT=Production
+      - PATH_BASE=/catalog-api
+    ports:
+      - 5102:80
+
+  catalog-api:
+    environment:
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - ASPNETCORE_ENVIRONMENT=Development
+      - PATH_BASE=/catalog-api
+    ports:
+      - "5103:80"
+
+  adapter-api:
+    environment:
+      - ASPNETCORE_URLS=http://0.0.0.0:80
+      - ASPNETCORE_ENVIRONMENT=Development
+      - PATH_BASE=/adapter-api
+    ports:
+      - "5104:80"
