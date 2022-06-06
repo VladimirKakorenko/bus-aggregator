@@ -13,7 +13,7 @@ services:
       context: .
       dockerfile: WebStatus/Dockerfile
 
-  webspa-server:
+  webspa:
     image: ${REGISTRY:-bus}/webspa:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
