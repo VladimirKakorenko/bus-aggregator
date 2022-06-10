@@ -1,9 +1,9 @@
 replicaCount: 1
 clusterName: bus-aks
-pathBase: /catalog-api
+pathBase: /data-api
 
 image:
-  repository: dav08649/catalog-api
+  repository: dav08649/data-api
   tag: latest
   pullPolicy: IfNotPresent
 
@@ -17,6 +17,7 @@ env:
       value: Development
     - name: PORT
       value: "80"
+
 probes:
   liveness:
     path: /liveness
@@ -29,4 +30,3 @@ probes:
     initialDelaySeconds: 90
     periodSeconds: 60
     port: 80
-
