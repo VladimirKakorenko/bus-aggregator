@@ -27,7 +27,7 @@ COPY "BusAggregator.sln" "BusAggregator.sln"
 
 COPY "ApiGateway/Web.Bus.HttpAggregator/Web.Bus.HttpAggregator.csproj" "ApiGateway/Web.Bus.HttpAggregator/Web.Bus.HttpAggregator.csproj"
 COPY "Services/Adapter/Adapter.API/Adapter.API.csproj" "Services/Adapter/Adapter.API/Adapter.API.csproj"
-COPY "Services/Catalog/Catalog.API/Catalog.API.csproj" "Services/Catalog/Catalog.API/Catalog.API.csproj"
+COPY "Services/Data/Data.API/Data.API.csproj" "Services/Data/Data.API/Data.API.csproj"
 COPY "Web/WebSPA.csproj" "Web/WebSPA.csproj"
 COPY "WebStatus/WebStatus.csproj" "WebStatus/WebStatus.csproj"
 

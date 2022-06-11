@@ -88,7 +88,7 @@ if (-not [string]::IsNullOrEmpty($registry)) {
 Write-Host "Begin eShopOnContainers installation using Helm" -ForegroundColor Green
 
 $infras = ("sql-data", "nosql-data", "rabbitmq", "keystore-data", "basket-data")
-$charts = ("catalog-api")
+$charts = ("data-api")
 $gateways = ("apigwms", "apigwws")
 
 if ($deployInfrastructure) {

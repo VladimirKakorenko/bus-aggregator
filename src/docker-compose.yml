@@ -23,10 +23,10 @@ services:
       - adapter-api
 
   data-api:
-    image: ${REGISTRY:-bus}/catalog.api:${PLATFORM:-linux}-${TAG:-latest}
+    image: ${REGISTRY:-bus}/data.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
-      dockerfile: Services/Catalog/Catalog.API/Dockerfile
+      dockerfile: Services/Data/Data.API/Dockerfile
 
   adapter-api:
     image: ${REGISTRY:-bus}/adapter.api:${PLATFORM:-linux}-${TAG:-latest}

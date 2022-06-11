@@ -5,11 +5,11 @@
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
-                    "Host": "catalog.api",
+                    "Host": "data.api",
                     "Port": 80
                 }
             ],
-            "UpstreamPathTemplate": "/api/catalog/{everything}",
+            "UpstreamPathTemplate": "/api/data/{everything}",
             "UpstreamHttpMethod": [
                 "POST",
                 "PUT",

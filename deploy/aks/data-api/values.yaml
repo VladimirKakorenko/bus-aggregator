@@ -17,7 +17,6 @@ env:
       value: Development
     - name: PORT
       value: "80"
-
 probes:
   liveness:
     path: /liveness
@@ -30,3 +29,4 @@ probes:
     initialDelaySeconds: 90
     periodSeconds: 60
     port: 80
+

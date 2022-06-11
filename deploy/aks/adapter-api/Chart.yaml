@@ -1,0 +1,4 @@
+apiVersion: v2
+appVersion: "v1.0"
+name: adapter-api
+version: 0.1.0

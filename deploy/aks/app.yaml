@@ -5,13 +5,13 @@ app:                                                    # app global settings
   name: "dav08649"                                        # Override for custom app name
   ingress:                                              # ingress related settings
     entries:
-      catalog: catalog-api                              # ingress entry for catalog api
+      data: data-api                              # ingress entry for data api
       # data: data-api                                    # ingress entry for data api
       # spa: ""                                           # ingress entry for web spa
       # status: webstatus                                 # ingress entry for web status
       # webapigw: webapigw                                # ingress entry for web bus Agw
   svc:
-      catalog: catalog-api                              # service name for catalog api
+      data: data-api                              # service name for data api
       # data: data-api                                    # service name for ordering api
       # spa: webspa                                       # service name for web spa
       # status: webstatus                                 # service name for web status

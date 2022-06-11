@@ -1,25 +1,25 @@
-{{- $name := include "catalog-api.fullname" . -}}
+{{- $name := include "data-api.fullname" . -}}
 {{- $cfgname := printf "%s-%s" "cfg" $name -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ template "catalog-api.fullname" . }}
+  name: {{ template "data-api.fullname" . }}
   labels:
     ufo: {{ $cfgname}}
-    app: {{ template "catalog-api.name" . }}
-    chart: {{ template "catalog-api.chart" . }}
+    app: {{ template "data-api.name" . }}
+    chart: {{ template "data-api.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ template "catalog-api.name" . }}
+      app: {{ template "data-api.name" . }}
       release: {{ .Release.Name }}
   template:
     metadata:
       labels:
-        app: {{ template "catalog-api.name" . }}
+        app: {{ template "data-api.name" . }}
         release: {{ .Release.Name }}
       {{ if .Values.inf.mesh.enabled -}}
       annotations:
