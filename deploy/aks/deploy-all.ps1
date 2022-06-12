@@ -1,32 +1,25 @@
 Param(
-    [parameter(Mandatory=$false)][string]$registry,
     [parameter(Mandatory=$false)][string]$dockerUser,
     [parameter(Mandatory=$false)][string]$dockerPassword,
     [parameter(Mandatory=$false)][string]$externalDns,
-    [parameter(Mandatory=$false)][string]$appName="bus",
-    [parameter(Mandatory=$false)][bool]$deployInfrastructure=$true,
+    [parameter(Mandatory=$false)][string]$appName="dav08649",
     [parameter(Mandatory=$false)][bool]$deployCharts=$true,
     [parameter(Mandatory=$false)][bool]$clean=$true,
     [parameter(Mandatory=$false)][string]$aksName="",
     [parameter(Mandatory=$false)][string]$aksRg="",
-    [parameter(Mandatory=$false)][string]$imageTag="latest",
+    [parameter(Mandatory=$false)][string]$imageTag="linux-latest",
     [parameter(Mandatory=$false)][bool]$useLocalk8s=$false,
-    [parameter(Mandatory=$false)][bool]$useMesh=$false,
     [parameter(Mandatory=$false)][string][ValidateSet('Always','IfNotPresent','Never', IgnoreCase=$false)]$imagePullPolicy="Always",
-    [parameter(Mandatory=$false)][string]$tlsSecretName = "bus-tls-custom",
+    [parameter(Mandatory=$false)][string]$tlsSecretName = "dav08649-tls-custom",
     [parameter(Mandatory=$false)][string]$chartsToDeploy="*",
     [parameter(Mandatory=$false)][string]$ingressMeshAnnotationsFile="ingress_values_linkerd.yaml"
     )
 
 function Install-Chart  {
-    Param([string]$chart,[string]$initialOptions, [bool]$customRegistry)
+    Param([string]$chart,[string]$initialOptions)
     $options=$initialOptions
 
-    if ($customRegistry) {
-        $options = "$options --set inf.registry.server=$registry --set inf.registry.login=$dockerUser --set inf.registry.pwd=$dockerPassword --set inf.registry.secretName=bus-docker-scret"
-    }
-    
-    if ($chart -ne "bus-common" -or $customRegistry)  {       # bus-common is ignored when no secret must be deployed        
+    if ($chart -ne "dav08649-common")  {
         $command = "install $appName-$chart $options $chart"
         Write-Host "Helm Command: helm $command" -ForegroundColor Gray
         Invoke-Expression 'cmd /c "helm $command"'
@@ -64,7 +57,7 @@ if ([string]::IsNullOrEmpty($dns)) {
 }
 
 if ($clean) {    
-    $listOfReleases=$(helm ls --filter eshop -q)    
+    $listOfReleases=$(helm ls --filter dav08649 -q)
     if ([string]::IsNullOrEmpty($listOfReleases)) {
         Write-Host "No previous releases found!" -ForegroundColor Green
 	}else{
@@ -75,50 +68,16 @@ if ($clean) {
 	}        
 }
 
-$useCustomRegistry=$false
+Write-Host "Begin BusAggregator installation using Helm" -ForegroundColor Green
 
-if (-not [string]::IsNullOrEmpty($registry)) {
-    $useCustomRegistry=$true
-    # if ([string]::IsNullOrEmpty($dockerUser) -or [string]::IsNullOrEmpty($dockerPassword)) {
-    #     Write-Host "Error: Must use -dockerUser AND -dockerPassword if specifying custom registry" -ForegroundColor Red
-    #     exit 1
-    # }
-}
-
-Write-Host "Begin eShopOnContainers installation using Helm" -ForegroundColor Green
-
-$infras = ("sql-data", "nosql-data", "rabbitmq", "keystore-data", "basket-data")
-$charts = ("data-api")
-$gateways = ("apigwms", "apigwws")
-
-if ($deployInfrastructure) {
-    # foreach ($infra in $infras) {
-    #     Write-Host "Installing infrastructure: $infra" -ForegroundColor Green
-    #     helm install "$appName-$infra" --values app.yaml --values inf.yaml --values $ingressValuesFile --set app.name=$appName --set inf.k8s.dns=$dns --set "ingress.hosts={$dns}" $infra     
-    # }
-}
-else {
-    Write-Host "eShopOnContainers infrastructure (bbdd, redis, ...) charts aren't installed (-deployCharts is false)" -ForegroundColor Yellow
-}
+$charts = ( "data-api", "adapter-api")
 
 if ($deployCharts) {
     foreach ($chart in $charts) {
         if ($chartsToDeploy -eq "*" -or $chartsToDeploy.Contains($chart)) {
             Write-Host "Installing: $chart" -ForegroundColor Green
-            Install-Chart $chart "-f app.yaml --values inf.yaml -f $ingressValuesFile -f $ingressMeshAnnotationsFile --set app.name=$appName --set inf.k8s.dns=$dns --set ingress.hosts={$dns} --set image.tag=$imageTag --set image.pullPolicy=$imagePullPolicy --set inf.mesh.enabled=$useMesh --set inf.k8s.local=$useLocalk8s" $useCustomRegistry
+            Install-Chart $chart "-f app.yaml --values inf.yaml -f $ingressValuesFile -f $ingressMeshAnnotationsFile --set app.name=$appName --set inf.k8s.dns=$dns --set ingress.hosts={$dns} --set image.tag=$imageTag --set image.pullPolicy=$imagePullPolicy --set inf.k8s.local=$useLocalk8s"
         }
     }
-
-    # foreach ($chart in $gateways) {
-    #     if ($chartsToDeploy -eq "*" -or $chartsToDeploy.Contains($chart)) {
-    #         Write-Host "Installing Api Gateway Chart: $chart" -ForegroundColor Green
-    #         Install-Chart $chart "-f app.yaml -f inf.yaml -f $ingressValuesFile  --set app.name=$appName --set inf.k8s.dns=$dns  --set image.pullPolicy=$imagePullPolicy --set inf.mesh.enabled=$useMesh --set ingress.hosts={$dns} $false
-            
-    #     }
-    # }
 }
-else {
-    Write-Host "eShopOnContainers non-infrastructure charts aren't installed (-deployCharts is false)" -ForegroundColor Yellow
-}
-
 Write-Host "helm charts installed." -ForegroundColor Green

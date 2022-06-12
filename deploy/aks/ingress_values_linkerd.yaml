@@ -1,12 +1,3 @@
-# This file contains extra annotations to make Linkerd work with ingress.
-# ingress.mesh.annotations are inserted into ingress.annotations of the resource being generated, if mesh is deployed
-#
-# It is designed to work with NGINX ingress controller or the Http Application Routing
-#
-# Check https://linkerd.io/2/tasks/using-ingress/ for more info or other ingress controllers
-#
-# If using your custom file, use -ingressMeshAnnotationsFile parameter in deploy-all.ps1
-
 ingress:
   mesh:
     annotations:

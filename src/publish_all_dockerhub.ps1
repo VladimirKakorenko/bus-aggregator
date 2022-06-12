@@ -1,6 +1,6 @@
 Param(
     [parameter(Mandatory=$false)][string]$sourceTag="linux-latest",
-    [parameter(Mandatory=$false)][string]$sourcePrefix="bus",
+    [parameter(Mandatory=$false)][string]$sourcePrefix="dav08649",
     [parameter(Mandatory=$false)][string]$targetTag="latest",
     [parameter(Mandatory=$false)][string]$targetPrefix="dav08649"
 )

@@ -2,19 +2,19 @@ version: '3.7'
 
 services:
   webapigw:
-    image: ${REGISTRY:-bus}/webapigw:${PLATFORM:-linux}-${TAG:-latest}
+    image: ${REGISTRY:-dav08649}/webapigw:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: ApiGateway/Web.Bus.HttpAggregator/Dockerfile
 
   webstatus:
-    image: ${REGISTRY:-bus}/webstatus:${PLATFORM:-linux}-${TAG:-latest}
+    image: ${REGISTRY:-dav08649}/webstatus:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: WebStatus/Dockerfile
 
   webspa:
-    image: ${REGISTRY:-bus}/webspa:${PLATFORM:-linux}-${TAG:-latest}
+    image: ${REGISTRY:-dav08649}/webspa:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Web/Dockerfile
@@ -23,13 +23,13 @@ services:
       - adapter-api
 
   data-api:
-    image: ${REGISTRY:-bus}/data.api:${PLATFORM:-linux}-${TAG:-latest}
+    image: ${REGISTRY:-dav08649}/data.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Data/Data.API/Dockerfile
 
   adapter-api:
-    image: ${REGISTRY:-bus}/adapter.api:${PLATFORM:-linux}-${TAG:-latest}
+    image: ${REGISTRY:-dav08649}/adapter.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: Services/Adapter/Adapter.API/Dockerfile

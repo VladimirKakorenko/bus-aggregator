@@ -1,9 +1,9 @@
 replicaCount: 1
-clusterName: bus-aks
+clusterName: dav08649-aks
 pathBase: /adapter-api
 
 image:
-  repository: dav08649/adapter-api
+  repository: dav08649/adapter.api
   tag: latest
   pullPolicy: IfNotPresent
 
@@ -16,7 +16,7 @@ env:
     - name: ASPNETCORE_ENVIRONMENT
       value: Development
     - name: PORT
-      value: "80"
+      value: 80
 
 probes:
   liveness:

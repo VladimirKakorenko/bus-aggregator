@@ -1,9 +1,9 @@
 replicaCount: 1
-clusterName: bus-aks
+clusterName: dav08649-aks
 pathBase: /data-api
 
 image:
-  repository: dav08649/data-api
+  repository: dav08649/data.api
   tag: latest
   pullPolicy: IfNotPresent
 
