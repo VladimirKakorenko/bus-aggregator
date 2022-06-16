@@ -48,7 +48,7 @@ spec:
             periodSeconds: {{ .Values.probes.readiness.periodSeconds }}
             timeoutSeconds: {{ .Values.probes.readiness.timeoutSeconds }}
           {{- end -}}
-          {{- end }}               
+          {{- end }}
           image: "{{ template "fqdn-image" . }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:

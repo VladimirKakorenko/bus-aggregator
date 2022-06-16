@@ -19,11 +19,9 @@ function Install-Chart  {
     Param([string]$chart,[string]$initialOptions)
     $options=$initialOptions
 
-    if ($chart -ne "dav08649-common")  {
-        $command = "install $appName-$chart $options $chart"
-        Write-Host "Helm Command: helm $command" -ForegroundColor Gray
-        Invoke-Expression 'cmd /c "helm $command"'
-    }
+    $command = "install $appName-$chart $options $chart"
+    Write-Host "Helm Command: helm $command" -ForegroundColor Gray
+    Invoke-Expression 'cmd /c "helm $command"'
 }
 
 $dns = $externalDns
@@ -56,16 +54,16 @@ if ([string]::IsNullOrEmpty($dns)) {
     Write-Host "No DNS specified. Ingress resources will be bound to public ip" -ForegroundColor Yellow
 }
 
-if ($clean) {    
+if ($clean) {
     $listOfReleases=$(helm ls --filter dav08649 -q)
     if ([string]::IsNullOrEmpty($listOfReleases)) {
         Write-Host "No previous releases found!" -ForegroundColor Green
-	}else{
+	} else {
         Write-Host "Previous releases found" -ForegroundColor Green
         Write-Host "Cleaning previous helm releases..." -ForegroundColor Green
-        helm uninstall $listOfReleases
+        hel uninstall $listOfReleases
         Write-Host "Previous releases deleted" -ForegroundColor Green
-	}        
+	}
 }
 
 Write-Host "Begin BusAggregator installation using Helm" -ForegroundColor Green
