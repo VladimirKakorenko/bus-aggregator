@@ -1,6 +1,9 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "test-api.fullname" . -}}
+{{- $fullName := include "webstatus.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
+{{- $ingressPath := .Values.pathBase -}}
+{{- $ingressPort := .Values.ingress.port -}}
+{{- $serviceName := $.Values.app.svc.status -}}
 {{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
   {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
   {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
@@ -17,7 +20,7 @@ kind: Ingress
 metadata:
   name: {{ $fullName }}
   labels:
-    {{- include "test-api.labels" . | nindent 4 }}
+    {{- include "webstatus.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
@@ -38,24 +41,20 @@ spec:
   {{- end }}
   rules:
     {{- range .Values.ingress.hosts }}
-    - host: {{ .host | quote }}
+    - host: {{ . }}
       http:
         paths:
-          {{- range .paths }}
-          - path: {{ .path }}
-            {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
-            pathType: {{ .pathType }}
-            {{- end }}
+          - path: {{ $ingressPath }}
+            pathType: Prefix
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
               service:
-                name: {{ $fullName }}
+                name: {{ $serviceName }}
                 port:
-                  number: {{ $svcPort }}
+                  number: {{ $ingressPort }}
               {{- else }}
-              serviceName: {{ $fullName }}
-              servicePort: {{ $svcPort }}
+              serviceName:  {{ $serviceName }}
+              servicePort: {{ $ingressPort }}
               {{- end }}
-          {{- end }}
     {{- end }}
 {{- end }}

@@ -7,12 +7,14 @@ app:                                                    # app global settings
     entries:
       data: data-api                              # ingress entry for data api
       adapter: adapter-api                                    # ingress entry for data api
+      status: webstatus
       # spa: ""                                           # ingress entry for web spa
       # status: webstatus                                 # ingress entry for web status
       # webapigw: webapigw                                # ingress entry for web bus Agw
   svc:
       data: data-api                              # service name for data api
       adapter: adapter-api
+      status: webstatus
       # data: data-api                                    # service name for ordering api
       # spa: webspa                                       # service name for web spa
       # status: webstatus                                 # service name for web status

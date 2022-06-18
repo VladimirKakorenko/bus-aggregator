@@ -7,13 +7,15 @@ Param(
     [parameter(Mandatory=$false)][bool]$clean=$true,
     [parameter(Mandatory=$false)][string]$aksName="",
     [parameter(Mandatory=$false)][string]$aksRg="",
-    [parameter(Mandatory=$false)][string]$imageTag="linux-latest",
+    [parameter(Mandatory=$false)][string]$imageTag="latest",
     [parameter(Mandatory=$false)][bool]$useLocalk8s=$false,
     [parameter(Mandatory=$false)][string][ValidateSet('Always','IfNotPresent','Never', IgnoreCase=$false)]$imagePullPolicy="Always",
     [parameter(Mandatory=$false)][string]$tlsSecretName = "dav08649-tls-custom",
     [parameter(Mandatory=$false)][string]$chartsToDeploy="*",
     [parameter(Mandatory=$false)][string]$ingressMeshAnnotationsFile="ingress_values_linkerd.yaml"
     )
+
+Write-Host "Use local: $useLocalk8s" -ForegroundColor Green
 
 function Install-Chart  {
     Param([string]$chart,[string]$initialOptions)
@@ -68,7 +70,7 @@ if ($clean) {
 
 Write-Host "Begin BusAggregator installation using Helm" -ForegroundColor Green
 
-$charts = ( "data-api", "adapter-api")
+$charts = ("data-api", "adapter-api", "webstatus")
 
 if ($deployCharts) {
     foreach ($chart in $charts) {

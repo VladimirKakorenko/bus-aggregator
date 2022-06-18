@@ -1,9 +1,17 @@
-# Default values for test-api.
+# Default values for webstatus.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
-pathBase: /data-api
+
+image:
+  repository: dav08649/webstatus
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "latest"
+
+pathBase: /webstatus
+imagePullSecrets: []
 
 env:
   values:
@@ -11,20 +19,25 @@ env:
       value: Development
     - name: PORT
       value: "80"
-
-image:
-  repository: dav08649/data.api
-  pullPolicy: Always
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: latest
-
-imagePullSecrets: []
-
+  configmap:
+    - name: HealthChecksUI__HealthChecks__0__Name
+      key: name__data__hc
+    - name: HealthChecksUI__HealthChecks__0__Uri
+      key: internalurls__data__hc
+    - name: HealthChecksUI__HealthChecks__1__Name
+      key: name__adapter__hc
+    - name: HealthChecksUI__HealthChecks__1__Uri
+      key: internalurls__adapter__hc
 serviceAccount:
   # Specifies whether a service account should be created
-  create: false
+  create: true
   # Annotations to add to the service account
-  annotations: {}
+  annotations: 
+    nginx.ingress.kubernetes.io/default-backend: ingress-nginx-controller
+    kubernetes.io/ingress.class: nginx
+    ## tells ingress to check for regex in the config file
+    nginx.ingress.kubernetes.io/use-regex: "true"
+
   # The name of the service account to use.
   # If not set and create is true, a name is generated using the fullname template
   name: ""
@@ -47,16 +60,12 @@ service:
   port: 80
 
 ingress:
-  enabled: false
+  enabled: true
   className: ""
   annotations: {}
+  port: 80
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: chart-example.local
-      paths:
-        - path: /
-          pathType: ImplementationSpecific
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:

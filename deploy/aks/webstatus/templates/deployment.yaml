@@ -1,16 +1,17 @@
+{{- $name := include "webstatus.fullname" . -}}
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "test-api.fullname" . }}
+  name: {{ include "webstatus.fullname" . }}
   labels:
-    {{- include "test-api.labels" . | nindent 4 }}
+    {{- include "webstatus.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "test-api.selectorLabels" . | nindent 6 }}
+      {{- include "webstatus.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,13 +19,13 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "test-api.selectorLabels" . | nindent 8 }}
+        {{- include "webstatus.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "test-api.serviceAccountName" . }}
+      serviceAccountName: {{ include "webstatus.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
@@ -41,19 +42,20 @@ spec:
             - name: {{ .name }}
               value: {{ .value | quote }}
           {{- end -}}
+          {{- end -}}
+          {{- if .Values.env.configmap -}}
+          {{- range .Values.env.configmap }}
+            - name: {{ .name }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ $name }}
+                  key: {{ .key }}
+          {{- end -}}
           {{- end }}
           ports:
             - name: http
               containerPort: 80
               protocol: TCP
-          livenessProbe:
-            httpGet:
-              path: /data
-              port: http
-          readinessProbe:
-            httpGet:
-              path: /data
-              port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
