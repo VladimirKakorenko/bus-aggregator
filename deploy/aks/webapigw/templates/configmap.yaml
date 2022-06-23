@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "webapigw.fullname" . }}
+  labels:
+    {{- include "webapigw.labels" . | nindent 4 }}
+data:
+  internalurl__adapter__hc: http://{{ .Values.app.svc.adapter }}/hc
+  internalurl__data__hc: http://{{ .Values.app.svc.data }}/hc

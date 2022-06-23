@@ -29,8 +29,7 @@ public class Startup
         services.AddHealthChecks()
             .AddCheck("self", () => HealthCheckResult.Healthy())
             .AddUrlGroup(new Uri(Configuration["AdapterUrlHC"]), "adapter-apicheck", tags: new string[] { "adapterapi" })
-            .AddUrlGroup(new Uri(Configuration["DataUrlHC"]), "data-apicheck", tags: new string[] { "dataapi" })
-            .AddUrlGroup(new Uri(Configuration["WebSpaUrlHC"]), "web-spacheck", tags: new string[] { "webspa" });
+            .AddUrlGroup(new Uri(Configuration["DataUrlHC"]), "data-apicheck", tags: new string[] { "dataapi" });
     }
 
     public async void Configure(IApplicationBuilder app, IHostingEnvironment env)

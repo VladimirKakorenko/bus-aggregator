@@ -9,10 +9,10 @@ app:                                                    # app global settings
       adapter: adapter-api                                    # ingress entry for data api
       status: webstatus
       spa: webspa
-      # webapigw: webapigw                                # ingress entry for web bus Agw
+      webapigw: webapigw                                # ingress entry for web bus Agw
   svc:
       data: data-api                              # service name for data api
       adapter: adapter-api
       status: webstatus
       spa: webspa
-      # webapigw: webapigw                                # service name for web shopping Agw
+      webapigw: webapigw                                # service name for web shopping Agw

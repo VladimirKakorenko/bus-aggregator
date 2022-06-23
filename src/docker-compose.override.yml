@@ -7,8 +7,6 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - AdapterUrlHC=http://adapter-api/hc
       - DataUrlHC=http://data-api/hc
-      - WebSpaUrlHC=http://webspa/hc
-      - WebApiGWUrlHC=http://webapigw/hc
     ports:
       - 5110:80
 
