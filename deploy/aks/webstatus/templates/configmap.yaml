@@ -11,3 +11,5 @@ data:
   internalurls__data__hc: http://{{ .Values.app.svc.data }}/hc
   name__spa__hc: SPA HTTP Check
   internalurls__spa__hc: http://{{ .Values.app.svc.spa }}/hc
+  name__webapigw__hc: WEB API Gateway HTTP Check
+  internalurls__webapigw__hc: http://{{ .Values.app.svc.webapigw }}/hc

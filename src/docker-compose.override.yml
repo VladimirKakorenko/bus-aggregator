@@ -2,6 +2,7 @@ version: '3.7'
 
 services:
   webapigw:
+    container_name: webapigw
     environment:
       - ASPNETCORE_URLS=http://0.0.0.0:80
       - ASPNETCORE_ENVIRONMENT=Development
@@ -11,6 +12,7 @@ services:
       - 5110:80
 
   webstatus:
+    container_name: webstatus
     environment:
       - ASPNETCORE_URLS=http://0.0.0.0:80
       - ASPNETCORE_ENVIRONMENT=Development
@@ -26,6 +28,7 @@ services:
       - "5101:80"
 
   webspa:
+    container_name: webspa
     environment:
       - ASPNETCORE_URLS=http://0.0.0.0:80
       - ASPNETCORE_ENVIRONMENT=Production
@@ -33,6 +36,7 @@ services:
       - 5102:80
 
   data-api:
+    container_name: data.api
     environment:
       - ASPNETCORE_URLS=http://0.0.0.0:80
       - ASPNETCORE_ENVIRONMENT=Development
@@ -41,6 +45,7 @@ services:
       - "5103:80"
 
   adapter-api:
+    container_name: adapter.api
     environment:
       - ASPNETCORE_URLS=http://0.0.0.0:80
       - ASPNETCORE_ENVIRONMENT=Development

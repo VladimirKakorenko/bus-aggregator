@@ -1,6 +1,7 @@
 {
     "Routes": [
         {
+            "ServiceName": "data-api",
             "DownstreamPathTemplate": "/{everything}",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
@@ -17,31 +18,16 @@
             ]
         },
         {
+            "ServiceName": "adapter-api",
             "DownstreamPathTemplate": "/{everything}",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
-                    "Host": "webspa",
+                    "Host": "adapter.api",
                     "Port": 80
                 }
             ],
-            "UpstreamPathTemplate": "/api/spa/{everything}",
-            "UpstreamHttpMethod": [
-                "POST",
-                "PUT",
-                "GET"
-            ]
-        },
-        {
-            "DownstreamPathTemplate": "/{everything}",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
-                    "Host": "webapigw",
-                    "Port": 80
-                }
-            ],
-            "UpstreamPathTemplate": "/{everything}",
+            "UpstreamPathTemplate": "/api/adapter/{everything}",
             "UpstreamHttpMethod": [
                 "POST",
                 "PUT",
@@ -51,6 +37,10 @@
     ],
     "GlobalConfiguration": {
         "RequestIdKey": "OcRequestId",
-        "AdministrationPath": "/administration"
+        "AdministrationPath": "/administration",
+        "ServiceDiscoveryProvider": {
+            "Namespace": "default",
+            "Type": "kube"
+        }
     }
 }

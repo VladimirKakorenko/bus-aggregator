@@ -32,6 +32,10 @@ env:
       key: name__spa__hc
     - name: HealthChecksUI__HealthChecks__2__Uri
       key: internalurls__spa__hc
+    - name: HealthChecksUI__HealthChecks__3__Name
+      key: name__webapigw__hc
+    - name: HealthChecksUI__HealthChecks__3__Uri
+      key: internalurls__webapigw__hc
 serviceAccount:
   # Specifies whether a service account should be created
   create: true

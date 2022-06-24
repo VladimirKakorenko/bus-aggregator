@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Ocelot.DependencyInjection;
 using Ocelot.Middleware;
+using Ocelot.Provider.Kubernetes;
 using IHostingEnvironment = Microsoft.Extensions.Hosting.IHostingEnvironment;
 
 namespace Web.Bus.HttpAggregator;
@@ -25,7 +26,7 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddOcelot(Configuration);
+        services.AddOcelot(Configuration).AddKubernetes();
         services.AddHealthChecks()
             .AddCheck("self", () => HealthCheckResult.Healthy())
             .AddUrlGroup(new Uri(Configuration["AdapterUrlHC"]), "adapter-apicheck", tags: new string[] { "adapterapi" })
