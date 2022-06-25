@@ -1,12 +1,11 @@
 {
     "Routes": [
         {
-            "ServiceName": "data-api",
             "DownstreamPathTemplate": "/{everything}",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
-                    "Host": "data.api",
+                    "Host": "data-api",
                     "Port": 80
                 }
             ],
@@ -18,12 +17,11 @@
             ]
         },
         {
-            "ServiceName": "adapter-api",
             "DownstreamPathTemplate": "/{everything}",
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
-                    "Host": "adapter.api",
+                    "Host": "adapter-api",
                     "Port": 80
                 }
             ],

@@ -8,14 +8,14 @@ Param(
     [parameter(Mandatory=$false)][string]$aksName="",
     [parameter(Mandatory=$false)][string]$aksRg="",
     [parameter(Mandatory=$false)][string]$imageTag="latest",
-    [parameter(Mandatory=$false)][bool]$useLocalk8s=$false,
+    [parameter(Mandatory=$false)][bool]$useLocal=$true,
     [parameter(Mandatory=$false)][string][ValidateSet('Always','IfNotPresent','Never', IgnoreCase=$false)]$imagePullPolicy="Always",
     [parameter(Mandatory=$false)][string]$tlsSecretName = "dav08649-tls-custom",
     [parameter(Mandatory=$false)][string]$chartsToDeploy="*",
     [parameter(Mandatory=$false)][string]$ingressMeshAnnotationsFile="ingress_values_linkerd.yaml"
     )
 
-Write-Host "Use local: $useLocalk8s" -ForegroundColor Green
+Write-Host "Use local: $useLocal" -ForegroundColor Green
 
 function Install-Chart  {
     Param([string]$chart,[string]$initialOptions)
@@ -30,7 +30,7 @@ $dns = $externalDns
 
 $ingressValuesFile="ingress_values.yaml"
 
-if ($useLocalk8s -eq $true) {
+if ($useLocal -eq $true) {
     $ingressValuesFile="ingress_values_dockerk8s.yaml"
     $dns="localhost"
 }
@@ -76,7 +76,7 @@ if ($deployCharts) {
     foreach ($chart in $charts) {
         if ($chartsToDeploy -eq "*" -or $chartsToDeploy.Contains($chart)) {
             Write-Host "Installing: $chart" -ForegroundColor Green
-            Install-Chart $chart "-f app.yaml --values inf.yaml -f $ingressValuesFile -f $ingressMeshAnnotationsFile --set app.name=$appName --set inf.k8s.dns=$dns --set ingress.hosts={$dns} --set image.tag=$imageTag --set image.pullPolicy=$imagePullPolicy --set inf.k8s.local=$useLocalk8s"
+            Install-Chart $chart "-f app.yaml --values inf.yaml -f $ingressValuesFile -f $ingressMeshAnnotationsFile --set app.name=$appName --set inf.k8s.dns=$dns --set ingress.hosts={$dns} --set image.tag=$imageTag --set image.pullPolicy=$imagePullPolicy --set inf.k8s.local=$useLocal"
         }
     }
 }
