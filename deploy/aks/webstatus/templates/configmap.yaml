@@ -7,8 +7,8 @@ metadata:
 data:
   name__adapter__hc: Adapter HTTP Check
   internalurls__adapter__hc: http://{{ .Values.app.svc.adapter }}/hc
-  name__data__hc: Data HTTP Check
-  internalurls__data__hc: http://{{ .Values.app.svc.data }}/hc
+  name__catalog__hc: Catalog HTTP Check
+  internalurls__catalog__hc: http://{{ .Values.app.svc.catalog }}/hc
   name__spa__hc: SPA HTTP Check
   internalurls__spa__hc: http://{{ .Values.app.svc.spa }}/hc
   name__webapigw__hc: WEB API Gateway HTTP Check

@@ -22,8 +22,8 @@ env:
   configmap:
     - name: AdapterUrlHC
       key: internalurl__adapter__hc
-    - name: DataUrlHC
-      key: internalurl__data__hc
+    - name: CatalogUrlHC
+      key: internalurl__catalog__hc
 
 serviceAccount:
   # Specifies whether a service account should be created

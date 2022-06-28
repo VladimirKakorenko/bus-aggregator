@@ -1,4 +1,4 @@
-{{- $name := include "data-api.fullname" . -}}
+{{- $name := include "catalog-api.fullname" . -}}
 {{- $protocol := include "protocol" . -}}
 
 apiVersion: v1
@@ -6,8 +6,8 @@ kind: ConfigMap
 metadata:
   name: "cfg-{{ $name }}"
   labels:
-    app: {{ template "data-api.name" . }}
-    chart: {{ template "data-api.chart" .}}
+    app: {{ template "catalog-api.name" . }}
+    chart: {{ template "catalog-api.chart" .}}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 data:

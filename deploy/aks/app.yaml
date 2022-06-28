@@ -1,18 +1,15 @@
-# This helm values file defines app-based settings
-# Charts use those values, so this file **MUST** be included in all chart releases
-
-app:                                                    # app global settings
-  name: "dav08649"                                        # Override for custom app name
-  ingress:                                              # ingress related settings
+app:
+  name: "dav08649"
+  ingress:
     entries:
-      data: data-api                              # ingress entry for data api
-      adapter: adapter-api                                    # ingress entry for data api
-      status: webstatus
-      spa: webspa
-      webapigw: webapigw                                # ingress entry for web bus Agw
-  svc:
-      data: data-api                              # service name for data api
+      catalog: catalog-api
       adapter: adapter-api
       status: webstatus
       spa: webspa
-      webapigw: webapigw                                # service name for web shopping Agw
+      webapigw: webapigw
+  svc:
+      catalog: catalog-api
+      adapter: adapter-api
+      status: webstatus
+      spa: webspa
+      webapigw: webapigw

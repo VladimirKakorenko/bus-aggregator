@@ -70,7 +70,7 @@ if ($clean) {
 
 Write-Host "Begin BusAggregator installation using Helm" -ForegroundColor Green
 
-$charts = ("data-api", "adapter-api", "webstatus", "webspa", "webapigw")
+$charts = ("catalog-api", "adapter-api", "webstatus", "webspa", "webapigw")
 
 if ($deployCharts) {
     foreach ($chart in $charts) {

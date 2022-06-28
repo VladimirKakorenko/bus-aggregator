@@ -6,7 +6,7 @@ services:
     environment:
       - ASPNETCORE_URLS=http://0.0.0.0:80
       - ASPNETCORE_ENVIRONMENT=Development
-      - ServiceUrlHC=http://data-api/hc
+      - ServiceUrlHC=http://catalog-api/hc
       - ServiceApiName=Catalog API
     volumes:
       - ./ApiGateways/Gateway.CatalogApi:/app/Configuration
@@ -33,8 +33,8 @@ services:
       - HealthChecksUI__HealthChecks__0__Name=Adapter HTTP Check
       - HealthChecksUI__HealthChecks__0__Uri=http://adapter-api/hc
 
-      - HealthChecksUI__HealthChecks__1__Name=Data HTTP Check
-      - HealthChecksUI__HealthChecks__1__Uri=http://data-api/hc
+      - HealthChecksUI__HealthChecks__1__Name=Catalog HTTP Check
+      - HealthChecksUI__HealthChecks__1__Uri=http://catalog-api/hc
 
       - HealthChecksUI__HealthChecks__2__Name=WebSPA HTTP Check
       - HealthChecksUI__HealthChecks__2__Uri=http://webspa/hc
@@ -55,12 +55,12 @@ services:
     ports:
       - 5102:80
 
-  data-api:
-    container_name: data-api
+  catalog-api:
+    container_name: catalog-api
     environment:
       - ASPNETCORE_URLS=http://0.0.0.0:80
       - ASPNETCORE_ENVIRONMENT=Development
-      - PATH_BASE=/data-api
+      - PATH_BASE=/catalog-api
     ports:
       - "5103:80"
 

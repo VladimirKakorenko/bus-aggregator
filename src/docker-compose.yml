@@ -25,14 +25,14 @@ services:
       context: .
       dockerfile: Web/Dockerfile
     depends_on:
-      - data-api
+      - catalog-api
       - adapter-api
 
-  data-api:
-    image: ${REGISTRY:-dav08649}/data.api:${PLATFORM:-linux}-${TAG:-latest}
+  catalog-api:
+    image: ${REGISTRY:-dav08649}/catalog.api:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
-      dockerfile: Services/Data/Data.API/Dockerfile
+      dockerfile: Services/Catalog/Catalog.API/Dockerfile
 
   adapter-api:
     image: ${REGISTRY:-dav08649}/adapter.api:${PLATFORM:-linux}-${TAG:-latest}

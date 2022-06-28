@@ -9,7 +9,7 @@ COPY "BusAggregator.sln" "BusAggregator.sln"
 
 COPY "ApiGateways/Gateway.BaseApi/Gateway.BaseApi.csproj" "ApiGateways/Gateway.BaseApi/Gateway.BaseApi.csproj"
 COPY "Services/Adapter/Adapter.API/Adapter.API.csproj" "Services/Adapter/Adapter.API/Adapter.API.csproj"
-COPY "Services/Data/Data.API/Data.API.csproj" "Services/Data/Data.API/Data.API.csproj"
+COPY "Services/Catalog/Catalog.API/Catalog.API.csproj" "Services/Catalog/Catalog.API/Catalog.API.csproj"
 COPY "Web/WebSPA.csproj" "Web/WebSPA.csproj"
 COPY "WebStatus/WebStatus.csproj" "WebStatus/WebStatus.csproj"
 
@@ -18,7 +18,7 @@ COPY "NuGet.config" "NuGet.config"
 RUN dotnet restore "BusAggregator.sln"
 
 COPY . .
-WORKDIR /Services/Data/Data.API
+WORKDIR /Services/Catalog/Catalog.API
 RUN dotnet publish --no-restore -c Release -o /app
 
 FROM build AS publish
@@ -27,4 +27,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
 
-ENTRYPOINT ["dotnet", "Data.API.dll"]
+ENTRYPOINT ["dotnet", "Catalog.API.dll"]

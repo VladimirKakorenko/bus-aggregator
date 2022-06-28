@@ -21,9 +21,9 @@ env:
       value: "80"
   configmap:
     - name: HealthChecksUI__HealthChecks__0__Name
-      key: name__data__hc
+      key: name__catalog__hc
     - name: HealthChecksUI__HealthChecks__0__Uri
-      key: internalurls__data__hc
+      key: internalurls__catalog__hc
     - name: HealthChecksUI__HealthChecks__1__Name
       key: name__adapter__hc
     - name: HealthChecksUI__HealthChecks__1__Uri

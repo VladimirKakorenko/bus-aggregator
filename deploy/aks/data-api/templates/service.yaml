@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ .Values.app.svc.data }}
+  name: {{ .Values.app.svc.catalog }}
   labels:
-    app: {{ template "data-api.name" . }}
-    chart: {{ template "data-api.chart" . }}
+    app: {{ template "catalog-api.name" . }}
+    chart: {{ template "catalog-api.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
 spec:
@@ -15,5 +15,5 @@ spec:
       protocol: TCP
       name: http
   selector:
-    app: {{ template "data-api.name" . }}
+    app: {{ template "catalog-api.name" . }}
     release: {{ .Release.Name }}

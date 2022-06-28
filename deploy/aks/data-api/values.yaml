@@ -1,9 +1,9 @@
 replicaCount: 1
 clusterName: dav08649-aks
-pathBase: /data-api
+pathBase: /catalog-api
 
 image:
-  repository: dav08649/data.api
+  repository: dav08649/catalog.api
   tag: latest
   pullPolicy: IfNotPresent
 

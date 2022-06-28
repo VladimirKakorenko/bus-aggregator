@@ -6,4 +6,4 @@ metadata:
     {{- include "webapigw.labels" . | nindent 4 }}
 data:
   internalurl__adapter__hc: http://{{ .Values.app.svc.adapter }}/hc
-  internalurl__data__hc: http://{{ .Values.app.svc.data }}/hc
+  internalurl__catalog__hc: http://{{ .Values.app.svc.catalog }}/hc
