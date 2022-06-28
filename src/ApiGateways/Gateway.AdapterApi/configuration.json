@@ -5,22 +5,6 @@
             "DownstreamScheme": "http",
             "DownstreamHostAndPorts": [
                 {
-                    "Host": "data-api",
-                    "Port": 80
-                }
-            ],
-            "UpstreamPathTemplate": "/api/data/{everything}",
-            "UpstreamHttpMethod": [
-                "POST",
-                "PUT",
-                "GET"
-            ]
-        },
-        {
-            "DownstreamPathTemplate": "/{everything}",
-            "DownstreamScheme": "http",
-            "DownstreamHostAndPorts": [
-                {
                     "Host": "adapter-api",
                     "Port": 80
                 }

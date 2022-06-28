@@ -1,11 +1,17 @@
 version: '3.7'
 
 services:
-  webapigw:
+  catalogapigw:
     image: ${REGISTRY:-dav08649}/webapigw:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
-      dockerfile: ApiGateway/Web.Bus.HttpAggregator/Dockerfile
+      dockerfile: ApiGateways/Gateway.BaseApi/Dockerfile
+  
+  adapterapigw:
+    image: ${REGISTRY:-dav08649}/webapigw:${PLATFORM:-linux}-${TAG:-latest}
+    build:
+      context: .
+      dockerfile: ApiGateways/Gateway.BaseApi/Dockerfile
 
   webstatus:
     image: ${REGISTRY:-dav08649}/webstatus:${PLATFORM:-linux}-${TAG:-latest}

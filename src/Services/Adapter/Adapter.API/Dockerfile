@@ -7,7 +7,7 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 
 COPY "BusAggregator.sln" "BusAggregator.sln"
 
-COPY "ApiGateway/Web.Bus.HttpAggregator/Web.Bus.HttpAggregator.csproj" "ApiGateway/Web.Bus.HttpAggregator/Web.Bus.HttpAggregator.csproj"
+COPY "ApiGateways/Gateway.BaseApi/Gateway.BaseApi.csproj" "ApiGateways/Gateway.BaseApi/Gateway.BaseApi.csproj"
 COPY "Services/Adapter/Adapter.API/Adapter.API.csproj" "Services/Adapter/Adapter.API/Adapter.API.csproj"
 COPY "Services/Data/Data.API/Data.API.csproj" "Services/Data/Data.API/Data.API.csproj"
 COPY "Web/WebSPA.csproj" "Web/WebSPA.csproj"

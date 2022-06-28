@@ -29,8 +29,7 @@ public class Startup
         services.AddOcelot(Configuration).AddKubernetes();
         services.AddHealthChecks()
             .AddCheck("self", () => HealthCheckResult.Healthy())
-            .AddUrlGroup(new Uri(Configuration["AdapterUrlHC"]), "adapter-apicheck", tags: new string[] { "adapterapi" })
-            .AddUrlGroup(new Uri(Configuration["DataUrlHC"]), "data-apicheck", tags: new string[] { "dataapi" });
+            .AddUrlGroup(new Uri(Configuration["ServiceUrlHC"]), Configuration["ServiceApiName"], tags: new string[] { "serviceapi" });
     }
 
     public async void Configure(IApplicationBuilder app, IHostingEnvironment env)
