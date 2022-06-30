@@ -1,23 +1,20 @@
 Param(
-    [parameter(Mandatory=$false)][string]$dockerUser,
-    [parameter(Mandatory=$false)][string]$dockerPassword,
     [parameter(Mandatory=$false)][string]$externalDns,
     [parameter(Mandatory=$false)][string]$appName="dav08649",
     [parameter(Mandatory=$false)][bool]$deployCharts=$true,
+    [parameter(Mandatory=$false)][bool]$deployGateways=$true,
     [parameter(Mandatory=$false)][bool]$clean=$true,
     [parameter(Mandatory=$false)][string]$aksName="",
     [parameter(Mandatory=$false)][string]$aksRg="",
     [parameter(Mandatory=$false)][string]$imageTag="latest",
     [parameter(Mandatory=$false)][bool]$useLocal=$true,
     [parameter(Mandatory=$false)][string][ValidateSet('Always','IfNotPresent','Never', IgnoreCase=$false)]$imagePullPolicy="Always",
-    [parameter(Mandatory=$false)][string]$tlsSecretName = "dav08649-tls-custom",
-    [parameter(Mandatory=$false)][string]$chartsToDeploy="*",
-    [parameter(Mandatory=$false)][string]$ingressMeshAnnotationsFile="ingress_values_linkerd.yaml"
+    [parameter(Mandatory=$false)][string]$chartsToDeploy="*"
     )
 
 Write-Host "Use local: $useLocal" -ForegroundColor Green
 
-function Install-Chart  {
+function Install-Chart {
     Param([string]$chart,[string]$initialOptions)
     $options=$initialOptions
 
@@ -70,14 +67,25 @@ if ($clean) {
 
 Write-Host "Begin BusAggregator installation using Helm" -ForegroundColor Green
 
-$charts = ("catalog-api", "adapter-api", "webstatus", "webspa", "webapigw")
+$gateways = ("adapterapigw", "catalogapigw")
+$charts = ("catalog-api", "adapter-api", "webstatus", "webspa")
 
 if ($deployCharts) {
     foreach ($chart in $charts) {
         if ($chartsToDeploy -eq "*" -or $chartsToDeploy.Contains($chart)) {
             Write-Host "Installing: $chart" -ForegroundColor Green
-            Install-Chart $chart "-f app.yaml --values inf.yaml -f $ingressValuesFile -f $ingressMeshAnnotationsFile --set app.name=$appName --set inf.k8s.dns=$dns --set ingress.hosts={$dns} --set image.tag=$imageTag --set image.pullPolicy=$imagePullPolicy --set inf.k8s.local=$useLocal"
+            Install-Chart $chart "-f app.yaml -f $ingressValuesFile --set app.name=$appName --set ingress.hosts={$dns} --set image.tag=$imageTag --set image.pullPolicy=$imagePullPolicy"
         }
     }
 }
+
+if ($deployGateways) {
+    foreach ($gateway in $gateways) {
+        if ($chartsToDeploy -eq "*" -or $chartsToDeploy.Contains($gateway)) {
+            Write-Host "Installing: $gateway" -ForegroundColor Green
+            Install-Chart $gateway "-f app.yaml -f $ingressValuesFile --set app.name=$appName --set ingress.hosts={$dns} --set image.tag=$imageTag --set image.pullPolicy=$imagePullPolicy"
+        }
+    }
+}
+
 Write-Host "helm charts installed." -ForegroundColor Green

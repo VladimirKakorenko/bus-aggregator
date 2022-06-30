@@ -11,5 +11,9 @@ data:
   internalurls__catalog__hc: http://{{ .Values.app.svc.catalog }}/hc
   name__spa__hc: SPA HTTP Check
   internalurls__spa__hc: http://{{ .Values.app.svc.spa }}/hc
-  name__webapigw__hc: WEB API Gateway HTTP Check
-  internalurls__webapigw__hc: http://{{ .Values.app.svc.webapigw }}/hc
+
+  name__adapterapigw__hc: Adapter API Gateway HTTP Check
+  internalurls__adapterapigw__hc: http://{{ .Values.app.svc.adapterapigw }}/hc
+
+  name__catalogapigw__hc: Catalog API Gateway HTTP Check
+  internalurls__catalogapigw__hc: http://{{ .Values.app.svc.catalogapigw }}/hc

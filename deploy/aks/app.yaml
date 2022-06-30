@@ -6,10 +6,12 @@ app:
       adapter: adapter-api
       status: webstatus
       spa: webspa
-      webapigw: webapigw
+      catalogapigw: catalogapigw
+      adapterapigw: adapterapigw
   svc:
       catalog: catalog-api
       adapter: adapter-api
       status: webstatus
       spa: webspa
-      webapigw: webapigw
+      catalogapigw: catalogapigw
+      adapterapigw: adapterapigw

@@ -22,9 +22,9 @@ spec:
         app: {{ template "adapter-api.name" . }}
         release: {{ .Release.Name }}
     spec:
-      {{ if .Values.inf.registry -}}
+      {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
-      - name: {{ .Values.inf.registry.secretName }}
+        {{- toYaml . | nindent 8 }}
       {{- end }}
       containers:
         - name: {{ .Chart.Name }}
@@ -48,12 +48,12 @@ spec:
             periodSeconds: {{ .Values.probes.readiness.periodSeconds }}
             timeoutSeconds: {{ .Values.probes.readiness.timeoutSeconds }}
           {{- end -}}
-          {{- end }}               
-          image: "{{ template "fqdn-image" . }}:{{ .Values.image.tag }}"
+          {{- end }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
             - name: PATH_BASE
-              value: {{ include "pathBase" . }}
+              value: {{ .Values.pathBase }}
             - name: k8sname
               value: {{ .Values.clusterName }}
           {{- if .Values.env.values -}}

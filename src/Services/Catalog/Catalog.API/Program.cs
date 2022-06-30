@@ -1,6 +1,4 @@
-using Services.Adapter.API;
-
-namespace Services.AdapterAPI;
+namespace Services.Catalog.API;
 
 public class Program
 {

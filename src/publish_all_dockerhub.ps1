@@ -8,7 +8,7 @@ Param(
 # Write-Host "Building images" -ForegroundColor Green
 # Invoke-Expression 'cmd /c "docker-compose build"'
 
-$images = ("adapter.api", "catalog.api", "webapigw", "webstatus", "webspa")
+$images = ("adapter.api", "catalog.api", "webstatus", "webspa", "catalogapigw", "adapterapigw")
 
 foreach($image in $images) {
     $sourceImage = "${sourcePrefix}/${image}:${sourceTag}";

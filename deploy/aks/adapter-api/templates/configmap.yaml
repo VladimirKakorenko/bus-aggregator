@@ -1,5 +1,4 @@
 {{- $name := include "adapter-api.fullname" . -}}
-{{- $protocol := include "protocol" . -}}
 
 apiVersion: v1
 kind: ConfigMap

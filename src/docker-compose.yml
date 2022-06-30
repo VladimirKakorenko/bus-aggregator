@@ -2,13 +2,13 @@ version: '3.7'
 
 services:
   catalogapigw:
-    image: ${REGISTRY:-dav08649}/webapigw:${PLATFORM:-linux}-${TAG:-latest}
+    image: ${REGISTRY:-dav08649}/catalogapigw:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: ApiGateways/Gateway.BaseApi/Dockerfile
   
   adapterapigw:
-    image: ${REGISTRY:-dav08649}/webapigw:${PLATFORM:-linux}-${TAG:-latest}
+    image: ${REGISTRY:-dav08649}/adapterapigw:${PLATFORM:-linux}-${TAG:-latest}
     build:
       context: .
       dockerfile: ApiGateways/Gateway.BaseApi/Dockerfile

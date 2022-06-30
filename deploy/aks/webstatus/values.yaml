@@ -24,18 +24,26 @@ env:
       key: name__catalog__hc
     - name: HealthChecksUI__HealthChecks__0__Uri
       key: internalurls__catalog__hc
+
     - name: HealthChecksUI__HealthChecks__1__Name
       key: name__adapter__hc
     - name: HealthChecksUI__HealthChecks__1__Uri
       key: internalurls__adapter__hc
+
     - name: HealthChecksUI__HealthChecks__2__Name
       key: name__spa__hc
     - name: HealthChecksUI__HealthChecks__2__Uri
       key: internalurls__spa__hc
+
     - name: HealthChecksUI__HealthChecks__3__Name
-      key: name__webapigw__hc
+      key: name__adapterapigw__hc
     - name: HealthChecksUI__HealthChecks__3__Uri
-      key: internalurls__webapigw__hc
+      key: internalurls__adapterapigw__hc
+
+    - name: HealthChecksUI__HealthChecks__4__Name
+      key: name__catalogapigw__hc
+    - name: HealthChecksUI__HealthChecks__4__Uri
+      key: internalurls__catalogapigw__hc
 serviceAccount:
   # Specifies whether a service account should be created
   create: true

@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Data.API.Controllers;
+namespace Services.Catalog.API.Controllers;
 
 [ApiController]
 public class HomeController : ControllerBase
