@@ -1,3 +1,4 @@
+using System.Text.Json;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
@@ -8,7 +9,12 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllers();
+        services.AddControllers()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.WriteIndented = false;
+                options.JsonSerializerOptions.WriteIndented = false;
+            });
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen();
         services.AddHealthChecks()
