@@ -1,0 +1,10 @@
+USE busagg;
+
+IF NOT EXISTS (SELECT * FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_NAME = N'city')
+BEGIN
+    CREATE TABLE city
+    (
+        id UNIQUEIDENTIFIER PRIMARY KEY default NEWID(),
+        nameId varchar(20)
+    )
+END

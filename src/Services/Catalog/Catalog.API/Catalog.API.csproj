@@ -9,8 +9,13 @@
   <ItemGroup>
     <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="6.0.4" />
     <PackageReference Include="dapper" Version="2.0.123" />
+    <PackageReference Include="dbup-sqlserver" Version="4.6.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Scripts/202207131042-AddCityTable.sql" />
   </ItemGroup>
 
 </Project>

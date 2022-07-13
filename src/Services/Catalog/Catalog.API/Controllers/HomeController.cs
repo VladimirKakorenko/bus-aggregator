@@ -9,6 +9,13 @@ namespace Services.Catalog.API.Controllers;
 [ApiController]
 public class HomeController : ControllerBase
 {
+    private readonly string _connectionString;
+
+    public HomeController(IConfiguration configuration)
+    {
+        this._connectionString = configuration.GetConnectionString("SqlLocal");
+    }
+
     [Route("/data")]
     public string GetData()
     {
@@ -18,9 +25,7 @@ public class HomeController : ControllerBase
     [Route("/sql")]
     public string GetSqlVersion()
     {
-        var cs = @"Server=localhost;Database=TestDb;Trusted_Connection=True;";
-
-        using (var con = new SqlConnection(cs))
+        using (var con = new SqlConnection(_connectionString))
         {
             con.Open();
 
@@ -33,9 +38,7 @@ public class HomeController : ControllerBase
     [Route("/sqlcities")]
     public IActionResult GetSqlCitiesAsync()
     {
-        var cs = @"Server=localhost;Database=TestDb;Trusted_Connection=True;";
-
-        using (var con = new SqlConnection(cs))
+        using (var con = new SqlConnection(_connectionString))
         {
             con.Open();
 
