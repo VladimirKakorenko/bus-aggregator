@@ -1,12 +1,10 @@
 namespace Services.Catalog.API.Models;
 
-public class Driver
+public class Passenger
 {
-    public int Id { get; set; }
-
+    public Guid Id { get; set; }
     public string FirstName { get; set; }
     public string Surname { get; set; }
     public string Patronymic { get; set; }
-
-    public DateTime? BirthDate { get; set; }
+    public string PhoneNumber { get; set; }
 }
