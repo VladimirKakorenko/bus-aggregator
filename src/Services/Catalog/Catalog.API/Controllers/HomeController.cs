@@ -13,13 +13,19 @@ public class HomeController : ControllerBase
 
     public HomeController(IConfiguration configuration)
     {
-        this._connectionString = configuration.GetConnectionString("SqlLocal");
+        this._connectionString = configuration.GetConnectionString("Default");
     }
 
     [Route("/data")]
     public string GetData()
     {
         return "Hello from Data Controller!";
+    }
+
+    [Route("/connection")]
+    public string GetConnection()
+    {
+        return _connectionString;
     }
 
     [Route("/sql")]

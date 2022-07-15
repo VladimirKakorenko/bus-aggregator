@@ -13,7 +13,7 @@ public static class DatabaseExtensions
             var services = scope.ServiceProvider;
             var configuration = services.GetRequiredService<IConfiguration>();
 
-            var connectionString = configuration.GetConnectionString("SqlLocal");
+            var connectionString = configuration.GetConnectionString("Default");
 
             EnsureDatabase.For.SqlDatabase(connectionString);
 
@@ -24,10 +24,6 @@ public static class DatabaseExtensions
                 .Build();
 
             var result = upgrader.PerformUpgrade();
-
-            Console.WriteLine("-----------------------------------------");
-            Console.WriteLine("Database updated: " + result.Successful);
-            Console.WriteLine("-----------------------------------------");
 
             return host;
         }

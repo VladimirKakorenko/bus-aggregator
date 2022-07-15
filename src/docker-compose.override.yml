@@ -1,6 +1,14 @@
 version: '3.7'
 
 services:
+  catalogsqldb:
+    container_name: catalogsqldb
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Pass@word
+    ports:
+      - 1433:1433
+
   catalogapigw:
     container_name: catalogapigw
     environment:
@@ -61,6 +69,7 @@ services:
       - ASPNETCORE_URLS=http://0.0.0.0:80
       - ASPNETCORE_ENVIRONMENT=Development
       - PATH_BASE=/catalog-api
+      - ConnectionStrings__Default=${BUS_AZURE_CATALOG_DB:-Server=catalogsqldb;Database=busagg;User Id=sa;Password=Pass@word}
     ports:
       - "5103:80"
 
