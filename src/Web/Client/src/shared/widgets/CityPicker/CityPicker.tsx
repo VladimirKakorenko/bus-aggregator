@@ -5,7 +5,7 @@ import { Widget } from '../Widget';
 export class CityPicker extends React.PureComponent {
     render() {
         return (
-            <Widget className="map-wrapper">
+            <Widget>
                 <Map styles={{ height: 500, width: 500 }} />
             </Widget>
         )
